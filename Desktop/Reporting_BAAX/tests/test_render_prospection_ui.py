@@ -16,6 +16,7 @@ def test_render_prospection_section2_table_capture(tmp_path):
     class StubST:
         def __init__(self):
             self._dataframes = []
+            self._metrics = []
 
         def subheader(self, *args, **kwargs):
             pass
@@ -41,7 +42,14 @@ def test_render_prospection_section2_table_capture(tmp_path):
             pass
 
         def metric(self, *args, **kwargs):
-            pass
+            # capture metric calls as (label, value)
+            try:
+                label = args[0] if len(args) > 0 else kwargs.get('label')
+                value = args[1] if len(args) > 1 else kwargs.get('value')
+                self._metrics.append((label, value))
+            except Exception:
+                self._metrics.append((None, None))
+
 
         def markdown(self, *args, **kwargs):
             pass
@@ -135,6 +143,11 @@ def test_render_prospection_section2_table_capture(tmp_path):
         assert "most_used_channel" in found.columns
         assert "engaged_channel" in found.columns
         assert "delay_contact_to_engage_j" in found.columns
+
+        # ensure metrics captured include Volume de prospects engagés = 1
+        mvals = {label: value for label, value in stub._metrics}
+        assert "Volume de prospects engagés" in mvals
+        assert int(mvals["Volume de prospects engagés"]) == 1
 
     finally:
         prosp.st = orig_st
