@@ -1,0 +1,22 @@
+.vscode/
+.venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+/.streamlit/
+/data/
+/.cache/
+.DS_Store
+*.log
+.env
+.idea/
+.conda/
+/.condarc
+/.anaconda/
+/.ipython/
+/.jupyter/
+/.vscode/extensions/
+/AppData/
+/Users/
+/Local Settings/
