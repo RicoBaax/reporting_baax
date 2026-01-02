@@ -149,5 +149,25 @@ def test_render_prospection_section2_table_capture(tmp_path):
         assert "Volume de prospects engagés" in mvals
         assert int(mvals["Volume de prospects engagés"]) == 1
 
+        # additional assertions for effort metrics
+        assert "Volume d'actions menées" in mvals
+        assert int(mvals["Volume d'actions menées"]) == 2
+
+        assert "Volume de réponses" in mvals
+        assert int(mvals["Volume de réponses"]) == 0
+
+        assert "Taux de réponse" in mvals
+        assert isinstance(mvals["Taux de réponse"], str)
+        assert mvals["Taux de réponse"].startswith("0")
+
+        assert "Délai moyen 1er contact → 1ère réponse (j)" in mvals
+        # when no responses, delay metric is set to "-"
+        assert mvals["Délai moyen 1er contact → 1ère réponse (j)"] == "-"
+
+        # engagement rate: 1 engaged out of 2 contacted -> 50%
+        assert "Taux d'engagement" in mvals
+        assert isinstance(mvals["Taux d'engagement"], str)
+        assert mvals["Taux d'engagement"].startswith("50")
+
     finally:
         prosp.st = orig_st
