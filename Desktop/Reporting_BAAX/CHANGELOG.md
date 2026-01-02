@@ -9,6 +9,7 @@
 - Add: Streamlit debug expander showing incoming emails / auto-replies for Prospection 🧪
 - Add: Unit tests for Prospection and Engaged table (pytest) ✅
 - Archival: Move onboarding, tools and unused components to `archive/` 📦
+- Fix: Phone response detection now requires a valid `hs_call_direction` (INBOUND/OUTBOUND) and matches disposition GUID or `COMPLETED` status ✅
 
 ---
 

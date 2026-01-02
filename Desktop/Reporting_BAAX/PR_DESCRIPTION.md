@@ -7,6 +7,7 @@ Summary:
 - Replace hour-based KPIs with day-based KPIs and update labels.
 - Add Streamlit debug expander for incoming emails & auto-replies.
 - Add unit tests for Prospection & Engaged table; all tests pass locally.
+- Fix: Phone response detection now requires a valid `hs_call_direction` (INBOUND/OUTBOUND) and disposition GUID or `COMPLETED` status; unit test added.
 - Archive unused files: `onboarding/`, `tools/`, `src/ui/components.py` → moved to `archive/`.
 
 Notes:
